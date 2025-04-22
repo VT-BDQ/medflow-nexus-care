@@ -24,7 +24,7 @@ type Patient = {
 const patients: Patient[] = [
   {
     id: "P-1234",
-    name: "James Wilson",
+    name: "Dr. Arjun Sharma",
     age: 42,
     gender: "Male",
     condition: "Hypertension",
@@ -33,7 +33,7 @@ const patients: Patient[] = [
   },
   {
     id: "P-5678",
-    name: "Emma Thompson",
+    name: "Priya Patel",
     age: 35,
     gender: "Female",
     condition: "Pregnancy (2nd Trimester)",
@@ -42,7 +42,7 @@ const patients: Patient[] = [
   },
   {
     id: "P-9012",
-    name: "Michael Brown",
+    name: "Rajesh Kumar",
     age: 58,
     gender: "Male",
     condition: "Diabetes Type 2",
@@ -51,7 +51,7 @@ const patients: Patient[] = [
   },
   {
     id: "P-3456",
-    name: "Sophia Martinez",
+    name: "Ananya Singh",
     age: 29,
     gender: "Female",
     condition: "Knee Injury",
@@ -60,7 +60,7 @@ const patients: Patient[] = [
   },
   {
     id: "P-7890",
-    name: "David Lee",
+    name: "Vikram Mehta",
     age: 67,
     gender: "Male",
     condition: "Coronary Artery Disease",
