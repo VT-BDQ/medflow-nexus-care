@@ -69,25 +69,25 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-medical-soft-gray p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-medical-primary p-4">
       <div className="mb-8 text-center">
         <div className="flex items-center justify-center gap-2 mb-2">
           <span className="text-3xl font-bold text-medical-secondary">MedFlow</span>
-          <span className="text-xl text-medical-primary">Nexus</span>
+          <span className="text-xl text-medical-accent">Nexus</span>
         </div>
-        <p className="text-medical-neutral">
+        <p className="text-medical-accent/80">
           Healthcare Management System
         </p>
       </div>
       
-      <Card className="w-full max-w-md shadow-lg border border-medical-soft-purple/30">
-        <CardHeader className="space-y-1 bg-medical-soft-purple/10">
-          <CardTitle className="text-2xl font-bold text-center text-medical-dark">Sign In</CardTitle>
-          <CardDescription className="text-center text-medical-neutral">
+      <Card className="w-full max-w-md shadow-medical border-2 border-medical-secondary/30 bg-medical-primary/90">
+        <CardHeader className="space-y-1 bg-medical-secondary/20">
+          <CardTitle className="text-2xl font-bold text-center text-medical-accent">Sign In</CardTitle>
+          <CardDescription className="text-center text-medical-accent/70">
             Enter your credentials to access your account
           </CardDescription>
           {error && (
-            <p className="text-sm font-medium text-medical-alert text-center">
+            <p className="text-sm font-medium text-red-500 text-center">
               {error}
             </p>
           )}
@@ -95,14 +95,14 @@ export default function Login() {
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-medical-dark">Email</Label>
+              <Label htmlFor="email" className="text-medical-accent">Email</Label>
               <div className="relative">
-                <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-medical-neutral" />
+                <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-medical-secondary" />
                 <Input 
                   id="email" 
                   placeholder="Enter your email" 
                   type="email" 
-                  className="pl-9 border-medical-soft-purple/50 focus:border-medical-primary"
+                  className="pl-9 bg-medical-primary/50 border-medical-secondary text-medical-accent placeholder-medical-accent/50 focus:border-medical-secondary"
                   defaultValue="doctor@example.com"
                   required 
                 />
@@ -110,58 +110,64 @@ export default function Login() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password" className="text-medical-dark">Password</Label>
+                <Label htmlFor="password" className="text-medical-accent">Password</Label>
                 <a href="#" className="text-xs text-medical-secondary hover:underline">
                   Forgot password?
                 </a>
               </div>
               <div className="relative">
-                <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-medical-neutral" />
+                <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-medical-secondary" />
                 <Input 
                   id="password" 
                   placeholder="Enter your password" 
                   type="password" 
-                  className="pl-9 border-medical-soft-purple/50 focus:border-medical-primary"
+                  className="pl-9 bg-medical-primary/50 border-medical-secondary text-medical-accent placeholder-medical-accent/50 focus:border-medical-secondary"
                   defaultValue="password123" 
                   required 
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="role" className="text-medical-dark">Role</Label>
+              <Label htmlFor="role" className="text-medical-accent">Role</Label>
               <Select value={role} onValueChange={(value) => setRole(value as UserRole)}>
-                <SelectTrigger id="role" className="border-medical-soft-purple/50 focus:border-medical-primary">
+                <SelectTrigger 
+                  id="role" 
+                  className="bg-medical-primary/50 border-medical-secondary text-medical-accent focus:border-medical-secondary"
+                >
                   <SelectValue placeholder="Select your role" />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="admin">Administrator</SelectItem>
-                  <SelectItem value="doctor">Doctor</SelectItem>
-                  <SelectItem value="receptionist">Receptionist</SelectItem>
-                  <SelectItem value="billing">Billing Staff</SelectItem>
-                  <SelectItem value="pharmacy">Pharmacy Staff</SelectItem>
-                  <SelectItem value="lab">Laboratory Staff</SelectItem>
+                <SelectContent className="bg-medical-primary text-medical-accent">
+                  <SelectItem value="admin" className="hover:bg-medical-secondary/20">Administrator</SelectItem>
+                  <SelectItem value="doctor" className="hover:bg-medical-secondary/20">Doctor</SelectItem>
+                  <SelectItem value="receptionist" className="hover:bg-medical-secondary/20">Receptionist</SelectItem>
+                  <SelectItem value="billing" className="hover:bg-medical-secondary/20">Billing Staff</SelectItem>
+                  <SelectItem value="pharmacy" className="hover:bg-medical-secondary/20">Pharmacy Staff</SelectItem>
+                  <SelectItem value="lab" className="hover:bg-medical-secondary/20">Laboratory Staff</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="flex items-center space-x-2">
-              <Checkbox id="remember" className="border-medical-soft-purple" />
+              <Checkbox 
+                id="remember" 
+                className="border-medical-secondary data-[state=checked]:bg-medical-secondary" 
+              />
               <label
                 htmlFor="remember"
-                className="text-sm font-medium leading-none text-medical-dark peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-none text-medical-accent peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 Remember me
               </label>
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-medical-primary hover:bg-medical-secondary text-white"
+              className="w-full bg-medical-secondary hover:bg-medical-secondary/90 text-medical-primary"
             >
               Sign In
             </Button>
           </form>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4">
-          <div className="text-center text-xs text-medical-neutral">
+          <div className="text-center text-xs text-medical-accent/70">
             <p>By signing in, you agree to our</p>
             <div className="flex justify-center space-x-2">
               <a href="#" className="text-medical-secondary hover:underline">Terms of Service</a>
@@ -169,12 +175,13 @@ export default function Login() {
               <a href="#" className="text-medical-secondary hover:underline">Privacy Policy</a>
             </div>
           </div>
-          <div className="text-center text-xs bg-medical-soft-purple/10 rounded-md p-2">
-            <p className="font-medium text-medical-primary">HIPAA & GDPR Compliant</p>
-            <p className="text-medical-neutral">All data is encrypted and securely stored</p>
+          <div className="text-center text-xs bg-medical-secondary/10 rounded-md p-2">
+            <p className="font-medium text-medical-secondary">HIPAA & GDPR Compliant</p>
+            <p className="text-medical-accent/70">All data is encrypted and securely stored</p>
           </div>
         </CardFooter>
       </Card>
     </div>
   );
 }
+
