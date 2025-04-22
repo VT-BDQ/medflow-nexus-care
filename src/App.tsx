@@ -10,6 +10,7 @@ import Patients from "./pages/Patients";
 import Appointments from "./pages/Appointments";
 import Records from "./pages/Records";
 import NotFound from "./pages/NotFound";
+import { RouteGuard } from "@/components/auth/RouteGuard";
 
 const queryClient = new QueryClient();
 
@@ -21,18 +22,62 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={
+            <RouteGuard>
+              <Layout />
+            </RouteGuard>
+          }>
             <Route index element={<Dashboard />} />
-            <Route path="/patients" element={<Patients />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/records" element={<Records />} />
-            <Route path="/billing" element={<ComingSoon title="Billing & Payment" />} />
-            <Route path="/staff" element={<ComingSoon title="Doctor & Staff Management" />} />
-            <Route path="/pharmacy" element={<ComingSoon title="Pharmacy & Medicine" />} />
-            <Route path="/laboratory" element={<ComingSoon title="Lab & Diagnostic Integration" />} />
-            <Route path="/analytics" element={<ComingSoon title="Reports & Analytics" />} />
-            <Route path="/settings" element={<ComingSoon title="Settings" />} />
-            <Route path="/security" element={<ComingSoon title="Security & Privacy" />} />
+            <Route path="/patients" element={
+              <RouteGuard allowedRoles={['admin', 'doctor', 'receptionist']}>
+                <Patients />
+              </RouteGuard>
+            } />
+            <Route path="/appointments" element={
+              <RouteGuard allowedRoles={['admin', 'doctor', 'receptionist']}>
+                <Appointments />
+              </RouteGuard>
+            } />
+            <Route path="/records" element={
+              <RouteGuard allowedRoles={['admin', 'doctor']}>
+                <Records />
+              </RouteGuard>
+            } />
+            <Route path="/billing" element={
+              <RouteGuard allowedRoles={['admin', 'billing']}>
+                <ComingSoon title="Billing & Payment" />
+              </RouteGuard>
+            } />
+            <Route path="/staff" element={
+              <RouteGuard allowedRoles={['admin']}>
+                <ComingSoon title="Doctor & Staff Management" />
+              </RouteGuard>
+            } />
+            <Route path="/pharmacy" element={
+              <RouteGuard allowedRoles={['admin', 'pharmacy']}>
+                <ComingSoon title="Pharmacy & Medicine" />
+              </RouteGuard>
+            } />
+            <Route path="/laboratory" element={
+              <RouteGuard allowedRoles={['admin', 'lab']}>
+                <ComingSoon title="Lab & Diagnostic Integration" />
+              </RouteGuard>
+            } />
+            <Route path="/analytics" element={
+              <RouteGuard allowedRoles={['admin']}>
+                <ComingSoon title="Reports & Analytics" />
+              </RouteGuard>
+            } />
+            <Route path="/settings" element={
+              <RouteGuard allowedRoles={['admin']}>
+                <ComingSoon title="Settings" />
+              </RouteGuard>
+            } />
+            <Route path="/security" element={
+              <RouteGuard allowedRoles={['admin']}>
+                <ComingSoon title="Security & Privacy" />
+              </RouteGuard>
+            } />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -41,7 +86,6 @@ const App = () => (
   </QueryClientProvider>
 );
 
-// Placeholder component for routes that are not yet implemented
 const ComingSoon = ({ title }: { title: string }) => {
   return (
     <div className="space-y-6">

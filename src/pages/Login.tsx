@@ -28,12 +28,50 @@ type UserRole = "admin" | "doctor" | "receptionist" | "billing" | "pharmacy" | "
 export default function Login() {
   const navigate = useNavigate();
   const [role, setRole] = useState<UserRole>("doctor");
+  const [error, setError] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, we would authenticate the user here
-    // For now, we'll just navigate to the dashboard
-    navigate("/");
+    
+    // In a real app, we would authenticate against a backend
+    // For now, we'll simulate authentication
+    const email = (e.target as any).email.value;
+    const password = (e.target as any).password.value;
+
+    // Basic validation
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    // Store authentication state
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('userRole', role);
+    localStorage.setItem('userEmail', email);
+
+    // Redirect based on role
+    switch (role) {
+      case 'doctor':
+        navigate("/appointments");
+        break;
+      case 'receptionist':
+        navigate("/patients");
+        break;
+      case 'billing':
+        navigate("/billing");
+        break;
+      case 'pharmacy':
+        navigate("/pharmacy");
+        break;
+      case 'lab':
+        navigate("/laboratory");
+        break;
+      case 'admin':
+        navigate("/dashboard");
+        break;
+      default:
+        navigate("/dashboard");
+    }
   };
 
   return (
@@ -54,6 +92,11 @@ export default function Login() {
           <CardDescription className="text-center">
             Enter your credentials to access your account
           </CardDescription>
+          {error && (
+            <p className="text-sm font-medium text-destructive text-center">
+              {error}
+            </p>
+          )}
         </CardHeader>
         <CardContent className="space-y-4">
           <Tabs defaultValue="credentials" className="space-y-4">
